@@ -6,6 +6,7 @@ import { NativeBaseProvider } from 'native-base';
 import { THEME } from './src/theme'
 import { Loading } from '@components/Loading';
 import { SignIn } from '@screens/SignIn';
+import { SignUp } from '@screens/SignUp';
 
 export default function App() {
   const [fontIsLoaded] = useFonts({ Roboto_400Regular, Roboto_700Bold })
@@ -17,7 +18,7 @@ export default function App() {
         barStyle="light-content"
         backgroundColor="transparent"
         translucent />
-      {fontIsLoaded ? <SignIn /> : <Loading />}
+      {fontIsLoaded ? <SignUp /> : <Loading />}
     </NativeBaseProvider>
   );
 }

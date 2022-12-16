@@ -2,10 +2,12 @@ import { VStack, Image, Text, Center, Heading, ScrollView } from "native-base";
 
 import LogoSvg from '@assets/logo.svg';
 import BackgroundImg from '@assets/background.png';
-import React from "react";
+
 import { Input } from "@components/Input";
 import { Button } from "@components/Button";
-export function SignIn() {
+import React from "react";
+
+export function SignUp() {
     return (
         <ScrollView contentContainerStyle={{ flexGrow: 1 }} showsVerticalScrollIndicator={false}>
             <VStack flex={1} bg="gray.700" px={10} pb={16}>
@@ -15,6 +17,7 @@ export function SignIn() {
                     resizeMode="contain"
                     position="absolute"
                 />
+
                 <Center my={24}>
                     <LogoSvg />
 
@@ -25,8 +28,12 @@ export function SignIn() {
 
                 <Center>
                     <Heading color="gray.100" fontSize="xl" mb={6} fontFamily="heading">
-                        Acesse a conta
+                        Crie sua conta
                     </Heading>
+
+                    <Input
+                        placeholder="Nome"
+                    />
 
                     <Input
                         placeholder="E-mail"
@@ -38,21 +45,20 @@ export function SignIn() {
                         placeholder="Senha"
                         secureTextEntry
                     />
+                    <Input
+                        placeholder="Repita a senha"
+                        secureTextEntry
+                    />
 
-                    <Button value="Acessar" />
-                </Center>
-
-                <Center mt={24}>
-                    <Text color="gray.100" fontSize="sm" mb={3} fontFamily="body">
-                        Ainda não tem acesso?
-                    </Text>
+                    <Button value="Criar e acessar" />
                 </Center>
 
                 <Button
-                    value="Criar Conta"
+                    value="Voltar para o login"
                     variant="outline"
+                    mt={24}
                 />
-            </VStack >
-        </ScrollView >
+            </VStack>
+        </ScrollView>
     );
 }
