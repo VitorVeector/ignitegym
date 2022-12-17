@@ -4,7 +4,7 @@ import React from "react"
 export const Profile = () => {
     return (
         <Center>
-            <Text>Profile</Text>
+            <Text color="white">Profile</Text>
         </Center>
     )
 }
