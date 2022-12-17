@@ -1,3 +1,4 @@
+import { Platform } from "react-native";
 import React from "react";
 
 import { createBottomTabNavigator, BottomTabNavigationProp } from "@react-navigation/bottom-tabs"
@@ -13,6 +14,8 @@ import ProfileSvg from '@assets/profile.svg';
 
 import { useTheme } from "native-base";
 
+import { color } from "native-base/lib/typescript/theme/styled-system";
+
 type AppRoutes = {
     home: undefined,
     exercise: undefined
@@ -25,12 +28,24 @@ export type AppRouteNavigationRoutesProps = BottomTabNavigationProp<AppRoutes>
 const { Navigator, Screen } = createBottomTabNavigator<AppRoutes>()
 
 export const AppRoutes = () => {
-    const { sizes } = useTheme()
+    const { sizes, colors } = useTheme()
 
     const iconSize = sizes[6]
 
     return (
-        <Navigator screenOptions={{ headerShown: false, tabBarShowLabel: false, }}>
+        <Navigator screenOptions={{
+            headerShown: false,
+            tabBarShowLabel: false,
+            tabBarActiveTintColor: colors.green[500],
+            tabBarInactiveTintColor: colors.gray[300],
+            tabBarStyle: {
+                backgroundColor: colors.gray[600],
+                borderTopWidth: 0,
+                height: Platform.OS === "android" ? 'auto' : 96,
+                paddingBottom: sizes[10],
+                paddingTop: sizes[6],
+            }
+        }}>
             <Screen name="home" component={Home} options={{
                 tabBarIcon: ({ color }) => <HomeSvg
                     fill={color}
@@ -52,7 +67,7 @@ export const AppRoutes = () => {
                     height={iconSize}
                 />
             }} />
-            <Screen name="exercise" component={Exercise} />
+            <Screen name="exercise" component={Exercise} options={{ tabBarButton: () => null }} />
         </Navigator>
     )
 }
