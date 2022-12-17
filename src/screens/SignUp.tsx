@@ -1,3 +1,8 @@
+import React from "react";
+
+import { useNavigation } from "@react-navigation/native";
+import { AuthNavigationRoutesProps } from "@routes/auth.routes"
+
 import { VStack, Image, Text, Center, Heading, ScrollView } from "native-base";
 
 import LogoSvg from '@assets/logo.svg';
@@ -5,9 +10,14 @@ import BackgroundImg from '@assets/background.png';
 
 import { Input } from "@components/Input";
 import { Button } from "@components/Button";
-import React from "react";
 
 export function SignUp() {
+    const navigation = useNavigation<AuthNavigationRoutesProps>();
+
+    function handleSignIn() {
+        navigation.navigate("signIn")
+    }
+
     return (
         <ScrollView contentContainerStyle={{ flexGrow: 1 }} showsVerticalScrollIndicator={false}>
             <VStack flex={1} px={10} pb={16}>
@@ -54,6 +64,7 @@ export function SignUp() {
                 </Center>
 
                 <Button
+                    onPress={handleSignIn}
                     value="Voltar para o login"
                     variant="outline"
                     mt={24}
