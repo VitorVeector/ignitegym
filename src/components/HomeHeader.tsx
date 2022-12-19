@@ -12,7 +12,7 @@ import { TouchableOpacity } from 'react-native'
 export const HomeHeader = () => {
     return (
         <HStack bg="gray.500" width="full" pt={16} pb={5} px={8} alignItems="center">
-            <UserPhoto size={16} source={{ uri: "https://github.com/vitorveector.png" }} alt="Foto de perfil do usuário" mr={3} />
+            <UserPhoto size={16} source={{ uri: "https://github.com/vitorveector.png" }} alt="Foto de perfil do usuário" mr={4} />
             <HStack alignItems="center" flex={1} justifyContent="space-between">
                 <VStack>
                     <Text color="gray.100" fontSize="md">Olá,</Text>
