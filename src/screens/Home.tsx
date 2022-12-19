@@ -17,12 +17,13 @@ export const Home = () => {
             <HomeHeader />
             <HStack>
                 <FlatList
-                    mt={10}
-                    ml={8}
+
                     data={exercices}
                     keyExtractor={item => item}
                     horizontal
                     showsHorizontalScrollIndicator={false}
+                    _contentContainerStyle={{ px: 8 }}
+                    py={10}
                     renderItem={({ item }) => (
                         <Group
                             groupName={item}
