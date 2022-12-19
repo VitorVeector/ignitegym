@@ -1,10 +1,13 @@
-import { Center, Text } from "native-base"
 import React from "react"
+
+import { VStack } from "native-base"
+
+import { HomeHeader } from "@components/HomeHeader"
 
 export const Home = () => {
     return (
-        <Center>
-            <Text color="white">Home</Text>
-        </Center>
+        <VStack flex={1}>
+            <HomeHeader />
+        </VStack>
     )
 }

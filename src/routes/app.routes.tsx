@@ -14,8 +14,6 @@ import ProfileSvg from '@assets/profile.svg';
 
 import { useTheme } from "native-base";
 
-import { color } from "native-base/lib/typescript/theme/styled-system";
-
 type AppRoutes = {
     home: undefined,
     exercise: undefined
