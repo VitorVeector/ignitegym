@@ -1,38 +1,60 @@
 import React, { useState } from "react"
 
-import { HStack, VStack, FlatList } from "native-base"
+import { HStack, VStack, FlatList, Heading, Text } from "native-base"
 
 import { HomeHeader } from "@components/HomeHeader"
 import { Group } from "@components/Group"
-import { JsxElement } from "typescript"
+import { ExerciceCard } from "@components/ExerciceCard"
 
 
 export const Home = () => {
 
-    const [exercices, setExercices] = useState(["peitoral", "costas", "bíceps", "tríceps", "ombro", "abdomem", "pernas"])
+    const [group, setGroup] = useState(["peitoral", "costas", "bíceps", "tríceps", "ombro", "abdomem", "pernas"])
     const [groupSelected, setGroupSelected] = useState<string>('peitoral');
+    const [exercices, setExercices] = useState(["Puxada", "Remada"])
 
     return (
         <VStack flex={1}>
             <HomeHeader />
-            <HStack>
-                <FlatList
+            <FlatList
+                data={group}
+                keyExtractor={item => item}
+                horizontal
+                showsHorizontalScrollIndicator={false}
+                _contentContainerStyle={{ px: 8, maxH: 10 }}
+                my={10}
+                maxH={10}
 
+                renderItem={({ item }) => (
+                    <Group
+                        groupName={item}
+                        isActive={groupSelected === item}
+                        onPress={() => setGroupSelected(item)} />
+                )} />
+
+            <VStack
+                mx={8}>
+                <HStack
+                    justifyContent="space-between"
+                    mb={3}
+                >
+                    <Heading
+                        color="gray.200"
+                        fontSize="md"
+                    >Exercícios</Heading>
+                    <Text color="gray.200" fontSize="sm">{exercices.length}</Text>
+                </HStack>
+                <FlatList
                     data={exercices}
                     keyExtractor={item => item}
-                    horizontal
-                    showsHorizontalScrollIndicator={false}
-                    _contentContainerStyle={{ px: 8 }}
-                    py={10}
-                    maxH={10}
+                    _contentContainerStyle={{ pb: 16 }}
+                    showsVerticalScrollIndicator={false}
                     renderItem={({ item }) => (
-                        <Group
-                            groupName={item}
-                            isActive={groupSelected === item}
-                            onPress={() => setGroupSelected(item)} />
+                        <ExerciceCard />
                     )} />
 
-            </HStack>
+            </VStack>
+
         </VStack>
     )
 }
