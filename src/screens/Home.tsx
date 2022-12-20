@@ -24,13 +24,26 @@ export const Home = () => {
                 _contentContainerStyle={{ px: 8, maxH: 10 }}
                 my={10}
                 maxH={10}
+                renderItem={({ item, index }) => {
+                    if (index === group.length - 1) {
+                        return (
+                            <Group
+                                groupName={item}
+                                isActive={groupSelected.toLocaleUpperCase() === item.toLocaleUpperCase()}
+                                onPress={() => setGroupSelected(item)} />
+                        )
+                    } else {
+                        return (
+                            <Group
+                                mr={3}
+                                groupName={item}
+                                isActive={groupSelected.toLocaleUpperCase() === item.toLocaleUpperCase()}
+                                onPress={() => setGroupSelected(item)} />)
+                    }
 
-                renderItem={({ item }) => (
-                    <Group
-                        groupName={item}
-                        isActive={groupSelected === item}
-                        onPress={() => setGroupSelected(item)} />
-                )} />
+
+
+                }} />
 
             <VStack
                 mx={8}>

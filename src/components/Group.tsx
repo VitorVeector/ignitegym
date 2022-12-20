@@ -10,7 +10,6 @@ type GroupProps = IPressableProps & {
 export const Group = ({ groupName, isActive, ...rest }: GroupProps) => {
     return (
         <Pressable
-            mr={3}
             bg="gray.600"
             width={24}
             height={10}
