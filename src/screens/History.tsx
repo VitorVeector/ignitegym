@@ -1,6 +1,6 @@
 import { HistoryCard } from "@components/HistoryCard"
 import { ScreenHeader } from "@components/ScreenHeader"
-import { VStack, SectionList, Heading } from "native-base"
+import { VStack, SectionList, Heading, Text } from "native-base"
 import React, { useState } from "react"
 
 export const History = () => {
@@ -29,6 +29,9 @@ export const History = () => {
                             mb={3}>
                             {section.title}
                         </Heading>
+                    )}
+                    ListEmptyComponent={() => (
+                        <Text textAlign="center" color="gray.300">Não há registro de treino. Vamos treinar!</Text>
                     )}
                 />
 
