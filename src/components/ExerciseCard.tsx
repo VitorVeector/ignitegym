@@ -3,13 +3,12 @@ import { MaterialIcons } from '@expo/vector-icons'
 import { HStack, Text, Image, VStack, Heading, Icon } from "native-base"
 import { TouchableOpacity, TouchableOpacityProps } from "react-native"
 
-type ExerciceCard = TouchableOpacityProps & {
-
+type ExerciseCard = TouchableOpacityProps & {
 }
 
-export const ExerciceCard = () => {
+export const ExerciseCard = ({ ...rest }: ExerciseCard) => {
     return (
-        <TouchableOpacity>
+        <TouchableOpacity {...rest}>
             <HStack
                 bg="gray.500"
                 alignItems="center"

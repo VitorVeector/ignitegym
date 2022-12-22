@@ -1,8 +1,8 @@
 import { Button as NativeBaseButton, IButtonProps, Text } from 'native-base'
-import React, { ReactNode } from 'react'
+import React from 'react'
 
 type ButtonProps = IButtonProps & {
-    value: ReactNode;
+    value: string;
     variant?: 'outline' | 'solid'
 }
 
