@@ -1,8 +1,9 @@
 import React, { useState } from "react"
 
 import * as ImagePicker from "expo-image-picker"
+import * as FileSystem from "expo-file-system"
 
-import { TouchableOpacity } from "react-native"
+import { TouchableOpacity, Alert } from "react-native"
 import { Center, Heading, ScrollView, Skeleton, Text, VStack } from "native-base"
 
 import { UserPhoto } from "@components/UserPhoto"
@@ -14,6 +15,7 @@ import { Button } from "@components/Button"
 const PHOTO_SIZE = 33
 
 export const Profile = () => {
+
     const [photoIsLoading, setPhotoIsLoading] = useState<boolean>(false)
 
     const [imgUri, setImgUri] = useState('https://github.com/vitorveector.png')
@@ -30,6 +32,12 @@ export const Profile = () => {
             });
 
             if (photoSelected.canceled) return
+
+            const photoInfo = await FileSystem.getInfoAsync(photoSelected.assets[0].uri)
+            if (photoInfo.size / 1024 / 1024 >= 5) {
+                return Alert.alert("Selecione uma imagem menor que 5Mb!")
+            }
+            console.log(photoInfo)
 
             setImgUri(photoSelected.assets[0].uri)
         } catch (err) {
