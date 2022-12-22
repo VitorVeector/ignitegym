@@ -11,14 +11,15 @@ export const HistoryCard = () => {
             rounded="md"
             p={4}
             mb={3}>
-            <VStack>
+            <VStack flex={1}>
                 <Heading
                     fontSize="md"
                     color="white"
                 >Costas</Heading>
                 <Text
                     fontSize="lg"
-                    color="gray.100">Puxada frontal</Text>
+                    color="gray.100"
+                    numberOfLines={1}>Puxada frontal</Text>
             </VStack>
             <Text
                 fontSize="md"

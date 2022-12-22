@@ -32,6 +32,7 @@ export const Home = () => {
                 _contentContainerStyle={{ px: 8, maxH: 10 }}
                 my={10}
                 maxH={10}
+                minH={10}
                 renderItem={({ item, index }) => {
                     if (index === group.length - 1) {
                         return (

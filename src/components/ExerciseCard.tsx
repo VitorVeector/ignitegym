@@ -20,7 +20,7 @@ export const ExerciseCard = ({ ...rest }: ExerciseCard) => {
                     source={{ uri: "https://cienciadotreinamento.com.br/wp-content/uploads/2015/11/Lat-pulldown-3_2.jpg" }}
                     alt="Imagem do exercicio"
                     size={16}
-                    resizeMode="center"
+                    resizeMode="cover"
                     rounded="md"
                 />
                 <VStack>
