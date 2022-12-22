@@ -16,7 +16,7 @@ export const Profile = () => {
     return (
         <VStack flex={1}>
             <ScreenHeader title='Perfil' />
-            <ScrollView>
+            <ScrollView contentContainerStyle={{ paddingBottom: 56 }}>
                 <Center mt={6} px={10}>
                     {
                         photoIsLoading ? (
