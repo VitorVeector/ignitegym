@@ -1,9 +1,12 @@
-import { ScreenHeader } from "@components/ScreenHeader"
-import { UserPhoto } from "@components/UserPhoto"
-import { Center, Heading, Link, ScrollView, Skeleton, Text, VStack } from "native-base"
-import React from "react"
+import React, { useState } from "react"
+
+import * as ImagePicker from "expo-image-picker"
+
 import { TouchableOpacity } from "react-native"
-import { useState } from "react"
+import { Center, Heading, ScrollView, Skeleton, Text, VStack } from "native-base"
+
+import { UserPhoto } from "@components/UserPhoto"
+import { ScreenHeader } from "@components/ScreenHeader"
 import { Input } from "@components/Input"
 import { Button } from "@components/Button"
 
@@ -12,6 +15,29 @@ const PHOTO_SIZE = 33
 
 export const Profile = () => {
     const [photoIsLoading, setPhotoIsLoading] = useState<boolean>(false)
+
+    const [imgUri, setImgUri] = useState('https://github.com/vitorveector.png')
+
+    const handleUserPhotoSelect = async () => {
+        setPhotoIsLoading(true)
+
+        try {
+            const photoSelected = await ImagePicker.launchImageLibraryAsync({
+                mediaTypes: ImagePicker.MediaTypeOptions.Images,
+                quality: 1,
+                aspect: [4, 4],
+                allowsEditing: true,
+            });
+
+            if (photoSelected.canceled) return
+
+            setImgUri(photoSelected.assets[0].uri)
+        } catch (err) {
+            console.log(err)
+        } finally {
+            setPhotoIsLoading(false)
+        }
+    }
 
     return (
         <VStack flex={1}>
@@ -31,11 +57,12 @@ export const Profile = () => {
                             <UserPhoto
                                 size={PHOTO_SIZE}
                                 alt="Foto de perfil"
-                                source={{ uri: "https://github.com/vitorveector.png" }} />
+                                source={{ uri: imgUri }} />
                         )
                     }
 
-                    <TouchableOpacity>
+                    <TouchableOpacity
+                        onPress={handleUserPhotoSelect}>
                         <Text color="green.500" fontWeight="bold" fontSize="md" mt={2} mb={8}>
                             Alterar Foto
                         </Text>
@@ -79,4 +106,8 @@ export const Profile = () => {
             </ScrollView>
         </VStack>
     );
+}
+
+function setImage(uri: string) {
+    throw new Error("Function not implemented.")
 }
