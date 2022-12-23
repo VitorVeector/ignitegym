@@ -8,9 +8,6 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { AuthRoutes } from "./auth.routes"
 import { AppRoutes } from "./app.routes"
 
-import { Home } from "@screens/Home";
-import { Profile } from "@screens/Profile";
-
 export const Routes = () => {
     const nativeTheme = useTheme()
     const theme = DefaultTheme
@@ -21,7 +18,7 @@ export const Routes = () => {
     return (
         <Box flex={1} bg='gray.700'>
             <NavigationContainer theme={theme}>
-                <AppRoutes />
+                <AuthRoutes />
             </NavigationContainer>
         </Box>
     )

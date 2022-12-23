@@ -4,7 +4,7 @@ import * as ImagePicker from "expo-image-picker"
 import * as FileSystem from "expo-file-system"
 
 import { TouchableOpacity, Alert } from "react-native"
-import { Center, Heading, ScrollView, Skeleton, Text, VStack } from "native-base"
+import { Center, Heading, ScrollView, Skeleton, Text, VStack, useToast } from "native-base"
 
 import { UserPhoto } from "@components/UserPhoto"
 import { ScreenHeader } from "@components/ScreenHeader"
@@ -20,6 +20,8 @@ export const Profile = () => {
 
     const [imgUri, setImgUri] = useState('https://github.com/vitorveector.png')
 
+    const toast = useToast()
+
     const handleUserPhotoSelect = async () => {
         setPhotoIsLoading(true)
 
@@ -34,10 +36,14 @@ export const Profile = () => {
             if (photoSelected.canceled) return
 
             const photoInfo = await FileSystem.getInfoAsync(photoSelected.assets[0].uri)
-            if (photoInfo.size / 1024 / 1024 >= 5) {
-                return Alert.alert("Selecione uma imagem menor que 5Mb!")
+
+            if (photoInfo.size / 1024 / 1024 >= 3) {
+                return toast.show({
+                    title: "A imagem não pode ultrapassar 5MB!",
+                    placement: "top",
+                    bgColor: "red.500"
+                })
             }
-            console.log(photoInfo)
 
             setImgUri(photoSelected.assets[0].uri)
         } catch (err) {

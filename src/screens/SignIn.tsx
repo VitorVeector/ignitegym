@@ -10,13 +10,26 @@ import { Input } from "@components/Input";
 
 import LogoSvg from '@assets/logo.svg';
 import BackgroundImg from '@assets/background.png';
+import { ISignInFormInputData } from "src/Interfaces/types";
+
+
+import { Controller, useForm } from "react-hook-form";
 
 export function SignIn() {
     const navigation = useNavigation<AuthNavigationRoutesProps>()
 
+    const { control, handleSubmit, formState: { errors } } = useForm<ISignInFormInputData>({
+        defaultValues: {
+            email: '',
+            password: ''
+        }
+    })
+
     function handleNavigateCreateAccount() {
         navigation.navigate("signUp")
     }
+
+    const onSubmit = data => console.log(data);
 
     return (
         <ScrollView contentContainerStyle={{ flexGrow: 1 }} showsVerticalScrollIndicator={false}>
@@ -41,18 +54,41 @@ export function SignIn() {
                         Acesse a conta
                     </Heading>
 
-                    <Input
-                        placeholder="E-mail"
-                        keyboardType="email-address"
-                        autoCapitalize="none"
+                    <Controller
+                        control={control}
+                        rules={{
+                            required: true
+                        }}
+                        render={({ field: { onChange, value } }) => (
+                            <Input
+                                placeholder="E-mail"
+                                value={value}
+                                onChangeText={onChange}
+                                keyboardType="email-address"
+                                autoCapitalize="none"
+                            />
+                        )}
+                        name="email" />
+                    {errors.email && <Text>This is required.</Text>}
 
-                    />
-                    <Input
-                        placeholder="Senha"
-                        secureTextEntry
-                    />
 
-                    <Button value="Acessar" />
+                    <Controller
+                        control={control}
+                        rules={{
+                            required: true
+                        }}
+                        render={({ field: { onChange, value } }) => (
+                            <Input
+                                placeholder="Senha"
+                                value={value}
+                                onChangeText={onChange}
+                                secureTextEntry
+                                autoCapitalize="none"
+                            />
+                        )}
+                        name="password" />
+
+                    <Button value="Acessar" onPress={handleSubmit(onSubmit)} />
                 </Center>
 
                 <Center mt={24}>
