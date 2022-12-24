@@ -11,12 +11,24 @@ import BackgroundImg from '@assets/background.png';
 import { Input } from "@components/Input";
 import { Button } from "@components/Button";
 
+import { Controller, useForm } from "react-hook-form"
+import { ISignUpFormInputData } from "src/Interfaces/types";
+
 export function SignUp() {
     const navigation = useNavigation<AuthNavigationRoutesProps>();
 
     function handleSignIn() {
         navigation.navigate("signIn")
     }
+
+    const { control, handleSubmit, formState: { errors } } = useForm<ISignUpFormInputData>({
+        defaultValues: {
+            name: '',
+            email: '',
+            password: '',
+            passwordConfirmation: '',
+        }
+    })
 
     return (
         <ScrollView contentContainerStyle={{ flexGrow: 1 }} showsVerticalScrollIndicator={false}>
@@ -42,24 +54,53 @@ export function SignUp() {
                         Crie sua conta
                     </Heading>
 
-                    <Input
-                        placeholder="Nome"
-                    />
+                    <Controller
+                        control={control}
+                        name="name"
+                        render={({ field: { onChange, value } }) => (
+                            <Input
+                                placeholder="Nome"
+                                onChangeText={onChange}
+                                value={value}
+                            />
+                        )} />
 
-                    <Input
-                        placeholder="E-mail"
-                        keyboardType="email-address"
-                        autoCapitalize="none"
+                    <Controller
+                        control={control}
+                        name="email"
+                        render={({ field: { onChange, value } }) => (
+                            <Input
+                                placeholder="E-mail"
+                                onChangeText={onChange}
+                                value={value}
+                                keyboardType="email-address"
+                                autoCapitalize="none"
+                            />
+                        )} />
 
-                    />
-                    <Input
-                        placeholder="Senha"
-                        secureTextEntry
-                    />
-                    <Input
-                        placeholder="Repita a senha"
-                        secureTextEntry
-                    />
+                    <Controller
+                        control={control}
+                        name="password"
+                        render={({ field: { onChange, value } }) => (
+                            <Input
+                                placeholder="Senha"
+                                onChangeText={onChange}
+                                value={value}
+                                secureTextEntry
+                            />
+                        )} />
+
+                    <Controller
+                        control={control}
+                        name="passwordConfirmation"
+                        render={({ field: { onChange, value } }) => (
+                            <Input
+                                placeholder="Repita a senha"
+                                onChangeText={onChange}
+                                value={value}
+                                secureTextEntry
+                            />
+                        )} />
 
                     <Button value="Criar e acessar" />
                 </Center>

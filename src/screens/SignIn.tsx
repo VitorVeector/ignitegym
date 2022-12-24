@@ -1,6 +1,6 @@
 import React from "react";
 
-import { VStack, Image, Text, Center, Heading, ScrollView } from "native-base";
+import { VStack, Image, Text, Center, Heading, ScrollView, useToast } from "native-base";
 
 import { useNavigation } from "@react-navigation/native";
 import { AuthNavigationRoutesProps } from "@routes/auth.routes";
@@ -11,7 +11,6 @@ import { Input } from "@components/Input";
 import LogoSvg from '@assets/logo.svg';
 import BackgroundImg from '@assets/background.png';
 import { ISignInFormInputData } from "src/Interfaces/types";
-
 
 import { Controller, useForm } from "react-hook-form";
 
@@ -29,7 +28,15 @@ export function SignIn() {
         navigation.navigate("signUp")
     }
 
-    const onSubmit = data => console.log(data);
+    const toast = useToast()
+
+    const onSubmit = (data) => {
+        if (!errors.email) {
+            return console.log(errors.email.message);
+        }
+
+        console.log("Submit")
+    }
 
     return (
         <ScrollView contentContainerStyle={{ flexGrow: 1 }} showsVerticalScrollIndicator={false}>
@@ -69,8 +76,6 @@ export function SignIn() {
                             />
                         )}
                         name="email" />
-                    {errors.email && <Text>This is required.</Text>}
-
 
                     <Controller
                         control={control}
@@ -87,6 +92,7 @@ export function SignIn() {
                             />
                         )}
                         name="password" />
+                    {errors.password && <Text>This is required.</Text>}
 
                     <Button value="Acessar" onPress={handleSubmit(onSubmit)} />
                 </Center>
