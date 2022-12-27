@@ -30,6 +30,15 @@ export function SignUp() {
         }
     })
 
+    const onSubmit = (data: ISignUpFormInputData) => {
+        console.log(data)
+        if (data.password !== data.passwordConfirmation) {
+            return console.log("ERROR, As senhas não conferem!")
+        }
+
+        return console.log("Enviado")
+    }
+
     return (
         <ScrollView contentContainerStyle={{ flexGrow: 1 }} showsVerticalScrollIndicator={false}>
             <VStack flex={1} px={10} pb={16}>
@@ -57,6 +66,13 @@ export function SignUp() {
                     <Controller
                         control={control}
                         name="name"
+                        rules={{
+                            required: true,
+                            pattern: {
+                                value: /^.{3,}$/,
+                                message: "Nome precisa ter no mínimo 3 caractéres."
+                            }
+                        }}
                         render={({ field: { onChange, value } }) => (
                             <Input
                                 placeholder="Nome"
@@ -64,10 +80,21 @@ export function SignUp() {
                                 value={value}
                             />
                         )} />
+                    <Text
+                        color="white">
+                        {errors.name?.message}
+                    </Text>
 
                     <Controller
                         control={control}
                         name="email"
+                        rules={{
+                            required: true,
+                            pattern: {
+                                value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+                                message: "Endereço de e-mail inválido."
+                            }
+                        }}
                         render={({ field: { onChange, value } }) => (
                             <Input
                                 placeholder="E-mail"
@@ -77,10 +104,21 @@ export function SignUp() {
                                 autoCapitalize="none"
                             />
                         )} />
+                    <Text
+                        color="white">
+                        {errors.email?.message}
+                    </Text>
 
                     <Controller
                         control={control}
                         name="password"
+                        rules={{
+                            required: true,
+                            pattern: {
+                                value: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/,
+                                message: "Senha fraca."
+                            }
+                        }}
                         render={({ field: { onChange, value } }) => (
                             <Input
                                 placeholder="Senha"
@@ -89,10 +127,15 @@ export function SignUp() {
                                 secureTextEntry
                             />
                         )} />
+                    <Text
+                        color="white">
+                        {errors.password?.message}
+                    </Text>
 
                     <Controller
                         control={control}
                         name="passwordConfirmation"
+                        rules={{ required: true }}
                         render={({ field: { onChange, value } }) => (
                             <Input
                                 placeholder="Repita a senha"
@@ -102,7 +145,7 @@ export function SignUp() {
                             />
                         )} />
 
-                    <Button value="Criar e acessar" />
+                    <Button onPress={handleSubmit(onSubmit)} value="Criar e acessar" />
                 </Center>
 
                 <Button

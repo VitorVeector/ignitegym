@@ -30,13 +30,7 @@ export function SignIn() {
 
     const toast = useToast()
 
-    const onSubmit = (data) => {
-        if (!errors.email) {
-            return console.log(errors.email.message);
-        }
-
-        console.log("Submit")
-    }
+    const onSubmit = data => console.log(data)
 
     return (
         <ScrollView contentContainerStyle={{ flexGrow: 1 }} showsVerticalScrollIndicator={false}>
@@ -64,7 +58,11 @@ export function SignIn() {
                     <Controller
                         control={control}
                         rules={{
-                            required: true
+                            required: true,
+                            pattern: {
+                                value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+                                message: "Endereço de e-mail inválido."
+                            }
                         }}
                         render={({ field: { onChange, value } }) => (
                             <Input
@@ -76,11 +74,15 @@ export function SignIn() {
                             />
                         )}
                         name="email" />
+                    <Text
+                        color="white">
+                        {errors.email?.message}
+                    </Text>
 
                     <Controller
                         control={control}
                         rules={{
-                            required: true
+                            required: "Por favor, informe a senha."
                         }}
                         render={({ field: { onChange, value } }) => (
                             <Input
@@ -92,7 +94,9 @@ export function SignIn() {
                             />
                         )}
                         name="password" />
-                    {errors.password && <Text>This is required.</Text>}
+                    <Text color="white">
+                        {errors.password?.message}
+                    </Text>
 
                     <Button value="Acessar" onPress={handleSubmit(onSubmit)} />
                 </Center>
