@@ -1,12 +1,9 @@
 import React from "react";
 
+import { useNavigation } from "@react-navigation/native";
 import { AuthNavigationRoutesProps } from "@routes/auth.routes"
 
-import { useNavigation } from "@react-navigation/native";
 import { VStack, Image, Text, Center, Heading, ScrollView } from "native-base";
-import { Controller, useForm } from "react-hook-form"
-import * as yup from "yup"
-import { yupResolver } from "@hookform/resolvers/yup"
 
 import LogoSvg from '@assets/logo.svg';
 import BackgroundImg from '@assets/background.png';
@@ -14,14 +11,8 @@ import BackgroundImg from '@assets/background.png';
 import { Input } from "@components/Input";
 import { Button } from "@components/Button";
 
+import { Controller, useForm } from "react-hook-form"
 import { ISignUpFormInputData } from "src/Interfaces/types";
-
-const signUpSchema = yup.object({
-    name: yup.string().required("Informe o nome.").min(3, "Mínimo de 3 caractéres."),
-    email: yup.string().required("Informe o email.").email("E-mail inválido."),
-    password: yup.string().required("Digite uma senha.").min(8, "Mínimo de 8 caractéres."),
-    passwordConfirmation: yup.string().oneOf([yup.ref('password.'), null], "As senhas não conferem.")
-})
 
 export function SignUp() {
     const navigation = useNavigation<AuthNavigationRoutesProps>();
@@ -31,7 +22,6 @@ export function SignUp() {
     }
 
     const { control, handleSubmit, formState: { errors } } = useForm<ISignUpFormInputData>({
-        resolver: yupResolver(signUpSchema),
         defaultValues: {
             name: '',
             email: '',
@@ -76,6 +66,13 @@ export function SignUp() {
                     <Controller
                         control={control}
                         name="name"
+                        rules={{
+                            required: true,
+                            pattern: {
+                                value: /^.{3,}$/,
+                                message: "Nome precisa ter no mínimo 3 caractéres."
+                            }
+                        }}
                         render={({ field: { onChange, value } }) => (
                             <VStack
 
@@ -98,6 +95,13 @@ export function SignUp() {
                     <Controller
                         control={control}
                         name="email"
+                        rules={{
+                            required: true,
+                            pattern: {
+                                value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+                                message: "Endereço de e-mail inválido."
+                            }
+                        }}
                         render={({ field: { onChange, value } }) => (
                             <VStack
 
@@ -122,6 +126,13 @@ export function SignUp() {
                     <Controller
                         control={control}
                         name="password"
+                        rules={{
+                            required: true,
+                            pattern: {
+                                value: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/,
+                                message: "Senha fraca."
+                            }
+                        }}
                         render={({ field: { onChange, value } }) => (
                             <VStack
                                 w="full"
@@ -145,18 +156,14 @@ export function SignUp() {
                     <Controller
                         control={control}
                         name="passwordConfirmation"
+                        rules={{ required: true }}
                         render={({ field: { onChange, value } }) => (
-                            <VStack w="full">
-                                <Input
-                                    isInvalid={!!errors.passwordConfirmation?.message}
-                                    placeholder="Repita a senha"
-                                    onChangeText={onChange}
-                                    value={value}
-                                    secureTextEntry
-                                />
-                                <Text color="red.500">{errors.passwordConfirmation?.message}</Text>
-                            </VStack>
-
+                            <Input
+                                placeholder="Repita a senha"
+                                onChangeText={onChange}
+                                value={value}
+                                secureTextEntry
+                            />
                         )} />
 
                     <Button mt={4} onPress={handleSubmit(onSubmit)} value="Criar e acessar" />

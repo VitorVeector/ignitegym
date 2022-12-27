@@ -1,10 +1,9 @@
 import React from "react";
 
 import { VStack, Image, Text, Center, Heading, ScrollView, useToast } from "native-base";
+
 import { useNavigation } from "@react-navigation/native";
-import { Controller, useForm } from "react-hook-form";
-import { yupResolver } from "@hookform/resolvers/yup"
-import * as yup from "yup";
+import { AuthNavigationRoutesProps } from "@routes/auth.routes";
 
 import { Button } from "@components/Button";
 import { Input } from "@components/Input";
@@ -13,18 +12,12 @@ import LogoSvg from '@assets/logo.svg';
 import BackgroundImg from '@assets/background.png';
 import { ISignInFormInputData } from "src/Interfaces/types";
 
-import { AuthNavigationRoutesProps } from "@routes/auth.routes";
-
-const signInSchema = yup.object({
-    email: yup.string().required("Informe seu e-mail.").email("Informe um e-mail válido."),
-    password: yup.string().required("Informe sua senha.")
-})
+import { Controller, useForm } from "react-hook-form";
 
 export function SignIn() {
     const navigation = useNavigation<AuthNavigationRoutesProps>()
 
     const { control, handleSubmit, formState: { errors } } = useForm<ISignInFormInputData>({
-        resolver: yupResolver(signInSchema),
         defaultValues: {
             email: '',
             password: ''
@@ -64,6 +57,13 @@ export function SignIn() {
 
                     <Controller
                         control={control}
+                        rules={{
+                            required: "Por favor, informe o e-mail",
+                            pattern: {
+                                value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+                                message: "Endereço de e-mail inválido."
+                            }
+                        }}
                         render={({ field: { onChange, value } }) => (
                             <VStack
                                 w="full">
@@ -87,6 +87,9 @@ export function SignIn() {
 
                     <Controller
                         control={control}
+                        rules={{
+                            required: "Por favor, informe a senha."
+                        }}
                         render={({ field: { onChange, value } }) => (
                             <VStack
                                 w="full">
@@ -98,7 +101,9 @@ export function SignIn() {
                                     secureTextEntry
                                     autoCapitalize="none"
                                 />
-                                <Text color="red.500">{errors.password?.message}</Text>
+                                <Text color="red.500">
+                                    {errors.password?.message}
+                                </Text>
                             </VStack>
 
                         )}
