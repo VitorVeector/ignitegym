@@ -58,26 +58,32 @@ export function SignIn() {
                     <Controller
                         control={control}
                         rules={{
-                            required: true,
+                            required: "Por favor, informe o e-mail",
                             pattern: {
                                 value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
                                 message: "Endereço de e-mail inválido."
                             }
                         }}
                         render={({ field: { onChange, value } }) => (
-                            <Input
-                                placeholder="E-mail"
-                                value={value}
-                                onChangeText={onChange}
-                                keyboardType="email-address"
-                                autoCapitalize="none"
-                            />
+                            <VStack
+                                w="full">
+                                <Input
+                                    isInvalid={!!errors.email?.message}
+                                    placeholder="E-mail"
+                                    value={value}
+                                    onChangeText={onChange}
+                                    keyboardType="email-address"
+                                    autoCapitalize="none"
+                                />
+                                <Text
+                                    color="red.500">
+                                    {errors.email?.message}
+                                </Text>
+                            </VStack>
+
                         )}
                         name="email" />
-                    <Text
-                        color="white">
-                        {errors.email?.message}
-                    </Text>
+
 
                     <Controller
                         control={control}
@@ -85,18 +91,24 @@ export function SignIn() {
                             required: "Por favor, informe a senha."
                         }}
                         render={({ field: { onChange, value } }) => (
-                            <Input
-                                placeholder="Senha"
-                                value={value}
-                                onChangeText={onChange}
-                                secureTextEntry
-                                autoCapitalize="none"
-                            />
+                            <VStack
+                                w="full">
+                                <Input
+                                    isInvalid={!!errors.password?.message}
+                                    placeholder="Senha"
+                                    value={value}
+                                    onChangeText={onChange}
+                                    secureTextEntry
+                                    autoCapitalize="none"
+                                />
+                                <Text color="red.500">
+                                    {errors.password?.message}
+                                </Text>
+                            </VStack>
+
                         )}
                         name="password" />
-                    <Text color="white">
-                        {errors.password?.message}
-                    </Text>
+
 
                     <Button value="Acessar" onPress={handleSubmit(onSubmit)} />
                 </Center>

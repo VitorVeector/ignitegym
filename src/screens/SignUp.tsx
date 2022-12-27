@@ -74,16 +74,23 @@ export function SignUp() {
                             }
                         }}
                         render={({ field: { onChange, value } }) => (
-                            <Input
-                                placeholder="Nome"
-                                onChangeText={onChange}
-                                value={value}
-                            />
+                            <VStack
+
+                                w="full">
+                                <Input
+                                    isInvalid={!!errors.name?.message}
+                                    placeholder="Nome"
+                                    onChangeText={onChange}
+                                    value={value}
+                                />
+                                <Text
+                                    color="red.500">
+                                    {errors.name?.message}
+                                </Text>
+                            </VStack>
+
                         )} />
-                    <Text
-                        color="white">
-                        {errors.name?.message}
-                    </Text>
+
 
                     <Controller
                         control={control}
@@ -96,18 +103,25 @@ export function SignUp() {
                             }
                         }}
                         render={({ field: { onChange, value } }) => (
-                            <Input
-                                placeholder="E-mail"
-                                onChangeText={onChange}
-                                value={value}
-                                keyboardType="email-address"
-                                autoCapitalize="none"
-                            />
+                            <VStack
+
+                                w="full">
+                                <Input
+                                    isInvalid={!!errors.email?.message}
+                                    placeholder="E-mail"
+                                    onChangeText={onChange}
+                                    value={value}
+                                    keyboardType="email-address"
+                                    autoCapitalize="none"
+                                />
+                                <Text
+                                    color="red.500">
+                                    {errors.email?.message}
+                                </Text>
+                            </VStack>
+
                         )} />
-                    <Text
-                        color="white">
-                        {errors.email?.message}
-                    </Text>
+
 
                     <Controller
                         control={control}
@@ -120,17 +134,24 @@ export function SignUp() {
                             }
                         }}
                         render={({ field: { onChange, value } }) => (
-                            <Input
-                                placeholder="Senha"
-                                onChangeText={onChange}
-                                value={value}
-                                secureTextEntry
-                            />
+                            <VStack
+                                w="full"
+                            >
+                                <Input
+                                    isInvalid={!!errors.password?.message}
+                                    placeholder="Senha"
+                                    onChangeText={onChange}
+                                    value={value}
+                                    secureTextEntry
+                                />
+                                <Text
+                                    color="red.500">
+                                    {errors.password?.message}
+                                </Text>
+                            </VStack>
+
                         )} />
-                    <Text
-                        color="white">
-                        {errors.password?.message}
-                    </Text>
+
 
                     <Controller
                         control={control}
@@ -145,7 +166,7 @@ export function SignUp() {
                             />
                         )} />
 
-                    <Button onPress={handleSubmit(onSubmit)} value="Criar e acessar" />
+                    <Button mt={4} onPress={handleSubmit(onSubmit)} value="Criar e acessar" />
                 </Center>
 
                 <Button
