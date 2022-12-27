@@ -32,7 +32,7 @@ export const ExerciseHeader = () => {
                 <HStack
                     alignItems="center"
                     justifyContent="space-between">
-                    <Heading
+                    <Heading fontFamily="heading"
                         flexShrink={1}
                         color="gray.100"
                         fontSize="xl">Puxada frontal</Heading>

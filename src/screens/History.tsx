@@ -23,7 +23,7 @@ export const History = () => {
                         <HistoryCard />
                     )}
                     renderSectionHeader={({ section }) => (
-                        <Heading
+                        <Heading fontFamily="heading"
                             fontSize="md"
                             color="gray.100"
                             mb={3}>

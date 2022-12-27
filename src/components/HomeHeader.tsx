@@ -16,7 +16,7 @@ export const HomeHeader = () => {
             <HStack alignItems="center" flex={1} justifyContent="space-between">
                 <VStack>
                     <Text color="gray.100" fontSize="md">Olá,</Text>
-                    <Heading color="gray.100" fontSize="md">Vitor</Heading>
+                    <Heading fontFamily="heading" color="gray.100" fontSize="md">Vitor</Heading>
                 </VStack>
                 <TouchableOpacity>
                     <Icon

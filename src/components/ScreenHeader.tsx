@@ -11,7 +11,7 @@ export const ScreenHeader = ({ title }: ScreenHeaderProps) => {
             width="full"
             bg="gray.500"
             pt={16} pb={5}>
-            <Heading color="gray.100">{title}</Heading>
+            <Heading fontFamily="heading" color="gray.100">{title}</Heading>
         </Center>
     )
 }

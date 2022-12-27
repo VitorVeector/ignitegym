@@ -60,7 +60,7 @@ export const Home = () => {
                     justifyContent="space-between"
                     mb={3}
                 >
-                    <Heading
+                    <Heading fontFamily="heading"
                         color="gray.200"
                         fontSize="md"
                     >Exercícios</Heading>

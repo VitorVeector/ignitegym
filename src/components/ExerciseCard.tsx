@@ -24,7 +24,7 @@ export const ExerciseCard = ({ ...rest }: ExerciseCard) => {
                     rounded="md"
                 />
                 <VStack>
-                    <Heading
+                    <Heading fontFamily="heading"
                         color="white"
                         fontSize="md">Puxada frontal</Heading>
                     <Text

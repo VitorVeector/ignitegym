@@ -12,7 +12,7 @@ export const HistoryCard = () => {
             p={4}
             mb={3}>
             <VStack flex={1}>
-                <Heading
+                <Heading fontFamily="heading"
                     fontSize="md"
                     color="white"
                 >Costas</Heading>
