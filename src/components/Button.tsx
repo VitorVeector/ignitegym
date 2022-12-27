@@ -18,7 +18,7 @@ export const Button = ({ value, variant, ...rest }: ButtonProps) => {
             {...rest}>
             <Text
                 color={variant === 'outline' ? 'green.500' : 'white'}
-                fontFamily='Heading fontFamily="heading"'
+                fontFamily='heading'
                 fontSize='sm'>{value}</Text>
         </NativeBaseButton>
     )
