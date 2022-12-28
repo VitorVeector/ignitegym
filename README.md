@@ -12,7 +12,7 @@ O presente repositório contém toda interface da aplicação desenvolvida com a
   </label>
 
   <p>
-  Aplicação completa está disponivel em [IgniteGym]()
+  Back-end da aplicação disponível em: 
   </p>
 
 ## Instalação
