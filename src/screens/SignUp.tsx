@@ -40,13 +40,18 @@ export function SignUp() {
         }
     })
 
-    const onSubmit = (data: ISignUpFormInputData) => {
-        console.log(data)
-        if (data.password !== data.passwordConfirmation) {
-            return console.log("ERROR, As senhas não conferem!")
-        }
+    const onSubmit = async ({ name, email, password }: ISignUpFormInputData) => {
+        const res = await fetch('http://192.168.101.9:3333/users', {
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ name, email, password })
+        })
 
-        return console.log("Enviado")
+        const data = res.json()
+        console.log(data)
     }
 
     return (
