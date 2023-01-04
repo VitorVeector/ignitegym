@@ -1,20 +1,23 @@
 import React from "react";
+import { useNavigation } from "@react-navigation/native";
+import { VStack, Image, Text, Center, Heading, ScrollView, useToast } from "native-base";
+import * as yup from "yup"
+import { Controller, useForm } from "react-hook-form"
+
 
 import { AuthNavigationRoutesProps } from "@routes/auth.routes"
-
-import { useNavigation } from "@react-navigation/native";
-import { VStack, Image, Text, Center, Heading, ScrollView } from "native-base";
-import { Controller, useForm } from "react-hook-form"
-import * as yup from "yup"
 import { yupResolver } from "@hookform/resolvers/yup"
-
+import { api } from "@services/api";
 import LogoSvg from '@assets/logo.svg';
 import BackgroundImg from '@assets/background.png';
+
 
 import { Input } from "@components/Input";
 import { Button } from "@components/Button";
 
 import { ISignUpFormInputData } from "src/Interfaces/types";
+import { AppError } from "@utils/AppError";
+
 
 const signUpSchema = yup.object({
     name: yup.string().required("Informe o nome.").min(3, "Mínimo de 3 caractéres."),
@@ -24,6 +27,8 @@ const signUpSchema = yup.object({
 })
 
 export function SignUp() {
+    const toast = useToast()
+
     const navigation = useNavigation<AuthNavigationRoutesProps>();
 
     function handleSignIn() {
@@ -41,17 +46,17 @@ export function SignUp() {
     })
 
     const onSubmit = async ({ name, email, password }: ISignUpFormInputData) => {
-        const res = await fetch('http://192.168.101.9:3333/users', {
-            method: 'POST',
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({ name, email, password })
-        })
-
-        const data = res.json()
-        console.log(data)
+        try {
+            await api.post("/users", { name, email, password })
+        } catch (err) {
+            const isAppError = err instanceof AppError
+            const title = isAppError ? err.message : "Erro ao cadastrar. Tente novamente mais tarde."
+            toast.show({
+                title,
+                placement: "top",
+                bgColor: "red.500"
+            })
+        }
     }
 
     return (
