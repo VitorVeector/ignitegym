@@ -8,6 +8,7 @@ import { NativeBaseProvider } from 'native-base';
 import { THEME } from './src/theme'
 import { Loading } from '@components/Loading';
 import { Routes } from './src/routes'
+import { AuthContext, AuthContextProvider } from '@contexts/AuthContext';
 
 export default function App() {
   const [fontIsLoaded] = useFonts({ Roboto_400Regular, Roboto_700Bold })
@@ -19,7 +20,10 @@ export default function App() {
         barStyle="light-content"
         backgroundColor="transparent"
         translucent />
-      {fontIsLoaded ? <Routes /> : <Loading />}
-    </NativeBaseProvider>
+      <AuthContextProvider >
+        {fontIsLoaded ? <Routes /> : <Loading />}
+      </AuthContextProvider>
+
+    </NativeBaseProvider >
   );
 }
