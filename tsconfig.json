@@ -27,7 +27,7 @@
         "./src/services/*"
       ],
       "@hooks/*": [
-        "./src/hooks/*"
+        "src/hooks/*"
       ],
       "@contexts/*": [
         "./src/contexts/*"

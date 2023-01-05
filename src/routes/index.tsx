@@ -6,9 +6,15 @@ import { NavigationContainer, DefaultTheme } from '@react-navigation/native'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
 import { AuthRoutes } from "./auth.routes"
-import { AppRoutes } from "./app.routes"
+
+import { useAuth } from "@hooks/useAuth";
 
 export const Routes = () => {
+
+    const { user } = useAuth()
+
+    console.log(user)
+
     const nativeTheme = useTheme()
     const theme = DefaultTheme
     theme.colors.background = nativeTheme.colors.gray[700]
