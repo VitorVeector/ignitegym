@@ -5,14 +5,23 @@ export const AuthContext = createContext<AuthContextProps>({} as AuthContextProp
 
 export const AuthContextProvider = ({ children }: AuthContextProviderProps) => {
     const [user, setUser] = useState({
-        id: "1",
-        name: "Joaquim",
-        email: "joaquim@email.com",
-        avatar: "Joaquin.png"
+        id: "",
+        name: "",
+        email: "",
+        avatar: ""
     })
 
+    function signIn(email, password) {
+        setUser({
+            id: "",
+            name: "",
+            email,
+            avatar: ""
+        })
+    }
+
     return (
-        <AuthContext.Provider value={{ user, setUser }}>
+        <AuthContext.Provider value={{ user, signIn }}>
             {children}
         </AuthContext.Provider>
     )

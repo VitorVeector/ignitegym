@@ -19,7 +19,7 @@ export interface ISignUpFormInputData {
 
 export type AuthContextProps = {
     user: UserDTO,
-    setUser: (user: UserDTO) => void
+    signIn: (email: string, password: string) => void
 }
 
 export type AuthContextProviderProps = {

@@ -12,9 +12,13 @@ import LogoSvg from '@assets/logo.svg';
 import BackgroundImg from '@assets/background.png';
 import { ISignInFormInputData } from "src/Interfaces/types";
 
+import { useAuth } from "@hooks/useAuth"
+
 import { Controller, useForm } from "react-hook-form";
 
 export function SignIn() {
+    const { signIn } = useAuth()
+
     const navigation = useNavigation<AuthNavigationRoutesProps>()
 
     const { control, handleSubmit, formState: { errors } } = useForm<ISignInFormInputData>({
@@ -28,9 +32,9 @@ export function SignIn() {
         navigation.navigate("signUp")
     }
 
-    const toast = useToast()
-
-    const onSubmit = data => console.log(data)
+    const onSubmit = ({ email, password }) => {
+        signIn(email, password)
+    }
 
     return (
         <ScrollView contentContainerStyle={{ flexGrow: 1 }} showsVerticalScrollIndicator={false}>
