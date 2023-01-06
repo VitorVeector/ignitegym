@@ -14,17 +14,10 @@ export const AuthContextProvider = ({ children }: AuthContextProviderProps) => {
                 email,
                 password
             })
-            console.log("SIGNIN", data)
+            setUser(data.user)
         } catch (err) {
             throw err
         }
-
-        setUser({
-            id: "",
-            name: "",
-            email,
-            avatar: ""
-        })
     }
 
     return (

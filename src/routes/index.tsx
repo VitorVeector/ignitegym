@@ -6,6 +6,7 @@ import { NavigationContainer, DefaultTheme } from '@react-navigation/native'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
 import { AuthRoutes } from "./auth.routes"
+import { AppRoutes } from "./app.routes";
 
 import { useAuth } from "@hooks/useAuth";
 
@@ -19,12 +20,10 @@ export const Routes = () => {
     const theme = DefaultTheme
     theme.colors.background = nativeTheme.colors.gray[700]
 
-    const Tab = createBottomTabNavigator()
-
     return (
         <Box flex={1} bg='gray.700'>
             <NavigationContainer theme={theme}>
-                <AuthRoutes />
+                {user.id ? <AppRoutes /> : <AuthRoutes />}
             </NavigationContainer>
         </Box>
     )
