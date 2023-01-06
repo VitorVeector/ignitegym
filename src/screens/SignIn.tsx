@@ -32,8 +32,8 @@ export function SignIn() {
         navigation.navigate("signUp")
     }
 
-    const onSubmit = ({ email, password }) => {
-        signIn(email, password)
+    const onSubmit = async ({ email, password }) => {
+        await signIn(email, password)
     }
 
     return (
