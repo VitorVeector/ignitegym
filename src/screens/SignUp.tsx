@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { useNavigation } from "@react-navigation/native";
 import { VStack, Image, Text, Center, Heading, ScrollView, useToast } from "native-base";
 import * as yup from "yup"
@@ -29,6 +29,8 @@ const signUpSchema = yup.object({
 export function SignUp() {
     const toast = useToast()
 
+    const [isLoading, setIsLoading] = useState<boolean>(false)
+
     const navigation = useNavigation<AuthNavigationRoutesProps>();
 
     function handleSignIn() {
@@ -47,7 +49,9 @@ export function SignUp() {
 
     const onSubmit = async ({ name, email, password }: ISignUpFormInputData) => {
         try {
+            setIsLoading(true)
             await api.post("/users", { name, email, password })
+            setIsLoading(false)
         } catch (err) {
             const isAppError = err instanceof AppError
             const title = isAppError ? err.message : "Erro ao cadastrar. Tente novamente mais tarde."
@@ -169,7 +173,7 @@ export function SignUp() {
 
                         )} />
 
-                    <Button mt={4} onPress={handleSubmit(onSubmit)} value="Criar e acessar" />
+                    <Button mt={4} onPress={handleSubmit(onSubmit)} value="Criar e acessar" isLoading={isLoading} />
                 </Center>
 
                 <Button
