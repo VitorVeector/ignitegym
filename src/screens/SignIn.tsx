@@ -15,9 +15,11 @@ import { ISignInFormInputData } from "src/Interfaces/types";
 import { useAuth } from "@hooks/useAuth"
 
 import { Controller, useForm } from "react-hook-form";
+import { AppError } from "@utils/AppError";
 
 export function SignIn() {
     const { signIn } = useAuth()
+    const toast = useToast()
 
     const navigation = useNavigation<AuthNavigationRoutesProps>()
 
@@ -33,7 +35,17 @@ export function SignIn() {
     }
 
     const onSubmit = async ({ email, password }) => {
-        await signIn(email, password)
+        try {
+            await signIn(email, password)
+        } catch (err) {
+            const isAppError = err instanceof AppError
+            const title = isAppError ? err.message : "Erro interno do servidor, tente novamente mais tarde!"
+            toast.show({
+                title,
+                placement: "top",
+                bgColor: "red.500"
+            })
+        }
     }
 
     return (

@@ -14,7 +14,7 @@ export const AuthContextProvider = ({ children }: AuthContextProviderProps) => {
                 email,
                 password
             })
-            console.log(data)
+            console.log("SIGNIN", data)
         } catch (err) {
             throw err
         }
