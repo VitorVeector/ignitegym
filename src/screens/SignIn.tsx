@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 
 import { VStack, Image, Text, Center, Heading, ScrollView, useToast } from "native-base";
 
@@ -21,6 +21,8 @@ export function SignIn() {
     const { signIn } = useAuth()
     const toast = useToast()
 
+    const [isLoading, setIsLoading] = useState<boolean>(false)
+
     const navigation = useNavigation<AuthNavigationRoutesProps>()
 
     const { control, handleSubmit, formState: { errors } } = useForm<ISignInFormInputData>({
@@ -36,7 +38,9 @@ export function SignIn() {
 
     const onSubmit = async ({ email, password }) => {
         try {
+            setIsLoading(true)
             await signIn(email, password)
+            setIsLoading(false)
         } catch (err) {
             const isAppError = err instanceof AppError
             const title = isAppError ? err.message : "Erro interno do servidor, tente novamente mais tarde!"
@@ -126,7 +130,7 @@ export function SignIn() {
                         name="password" />
 
 
-                    <Button value="Acessar" onPress={handleSubmit(onSubmit)} />
+                    <Button value="Acessar" onPress={handleSubmit(onSubmit)} isLoading={isLoading} />
                 </Center>
 
                 <Center mt={24}>
