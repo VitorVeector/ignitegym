@@ -19,7 +19,8 @@ export interface ISignUpFormInputData {
 
 export type AuthContextProps = {
     user: UserDTO,
-    signIn: (email: string, password: string) => Promise<void>
+    signIn: (email: string, password: string) => Promise<void>,
+    isLoadingStorageUserData: boolean
 }
 
 export type AuthContextProviderProps = {
