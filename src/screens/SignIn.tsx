@@ -40,7 +40,6 @@ export function SignIn() {
         try {
             setIsLoading(true)
             await signIn(email, password)
-            setIsLoading(false)
         } catch (err) {
             const isAppError = err instanceof AppError
             const title = isAppError ? err.message : "Erro interno do servidor, tente novamente mais tarde!"
@@ -49,6 +48,7 @@ export function SignIn() {
                 placement: "top",
                 bgColor: "red.500"
             })
+            setIsLoading(false)
         }
     }
 
