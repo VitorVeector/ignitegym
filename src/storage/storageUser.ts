@@ -13,5 +13,4 @@ export const storageUserGet = async () => {
     const user: UserDTO = storage ? JSON.parse(storage) : {}
 
     return user
-
 }
