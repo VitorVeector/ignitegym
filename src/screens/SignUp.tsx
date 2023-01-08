@@ -17,6 +17,7 @@ import { Button } from "@components/Button";
 
 import { ISignUpFormInputData } from "src/Interfaces/types";
 import { AppError } from "@utils/AppError";
+import { useAuth } from "@hooks/useAuth";
 
 
 const signUpSchema = yup.object({
@@ -28,6 +29,8 @@ const signUpSchema = yup.object({
 
 export function SignUp() {
     const toast = useToast()
+
+    const { signIn } = useAuth()
 
     const [isLoading, setIsLoading] = useState<boolean>(false)
 
@@ -51,7 +54,7 @@ export function SignUp() {
         try {
             setIsLoading(true)
             await api.post("/users", { name, email, password })
-            setIsLoading(false)
+            await signIn(email, password)
         } catch (err) {
             const isAppError = err instanceof AppError
             const title = isAppError ? err.message : "Erro ao cadastrar. Tente novamente mais tarde."
@@ -60,6 +63,8 @@ export function SignUp() {
                 placement: "top",
                 bgColor: "red.500"
             })
+        } finally {
+            setIsLoading(false)
         }
     }
 
