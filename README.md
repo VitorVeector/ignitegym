@@ -11,13 +11,13 @@ O presente repositório contém toda interface da aplicação desenvolvida com a
   NativeBase is an accessible, utility-first component library that helps you build consistent UI across Android, iOS and Web.
   </label>
 
-  <p>
-  Back-end da aplicação disponível em: [ignitegym-api](https://github.com/VitorVeector/ignitegym-api)
-  </p>
+  
+  Back-end da aplicação disponível em: [ignitegym-api](https://github.com/VitorVeector/ignitegym-api/) 
+  
 
 ## Instalação
 
-Para rodar a aplicação, é necessário que tenha instalado expo-cli na sua máquina e algum emulador mobile
+Para rodar a aplicação, é necessário que tenha instalado expo-cli na sua máquina e algum emulador mobile.
 
 ```bash
   npm install -g expo-cli
