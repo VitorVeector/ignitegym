@@ -134,7 +134,6 @@ export function SignUp() {
                                     {errors.email?.message}
                                 </Text>
                             </VStack>
-
                         )} />
 
 
