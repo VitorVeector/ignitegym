@@ -2,11 +2,13 @@ import React from "react"
 import { MaterialIcons } from '@expo/vector-icons'
 import { HStack, Text, Image, VStack, Heading, Icon } from "native-base"
 import { TouchableOpacity, TouchableOpacityProps } from "react-native"
+import { ExerciseDTO } from "@dtos/ExerciseDTO"
 
 type ExerciseCard = TouchableOpacityProps & {
+    exerciseInfo: ExerciseDTO
 }
 
-export const ExerciseCard = ({ ...rest }: ExerciseCard) => {
+export const ExerciseCard = ({ exerciseInfo, ...rest }: ExerciseCard) => {
     return (
         <TouchableOpacity {...rest}>
             <HStack
@@ -24,13 +26,16 @@ export const ExerciseCard = ({ ...rest }: ExerciseCard) => {
                     rounded="md"
                 />
                 <VStack>
-                    <Heading fontFamily="heading"
+                    <Heading
+                        fontFamily="heading"
                         color="white"
-                        fontSize="md">Puxada frontal</Heading>
+                        fontSize="md"
+                        maxW={160}
+                    >{exerciseInfo.name}</Heading>
                     <Text
                         color="gray.200"
                         fontSize="sm"
-                        numberOfLines={1}>3 séries x 12 repetições</Text>
+                        numberOfLines={1}>{exerciseInfo.series} séries x {exerciseInfo.repetitions} repetições</Text>
                 </VStack>
                 <Icon
                     as={MaterialIcons}

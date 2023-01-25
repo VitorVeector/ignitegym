@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useCallback } from "react"
 
-import { HStack, VStack, FlatList, Heading, Text, Toast, useToast } from "native-base"
+import { HStack, VStack, FlatList, Heading, Text, useToast } from "native-base"
 
 import { useNavigation, useFocusEffect } from "@react-navigation/native"
 
@@ -10,6 +10,7 @@ import { ExerciseCard } from "@components/ExerciseCard"
 import { AppRouteNavigationRoutesProps } from "@routes/app.routes"
 import { api } from "@services/api"
 import { AppError } from "@utils/AppError"
+import { ExerciseDTO } from "@dtos/ExerciseDTO"
 
 
 export const Home = () => {
@@ -18,9 +19,9 @@ export const Home = () => {
 
     const [group, setGroup] = useState([])
 
-    const [groupSelected, setGroupSelected] = useState('peitoral');
+    const [groupSelected, setGroupSelected] = useState('antebraço');
 
-    const [exercices, setExercices] = useState(["Puxada", "Remada"])
+    const [exercices, setExercices] = useState<ExerciseDTO[]>([])
 
     const handleOpenExerciceDetails = () => {
         navigation.navigate("exercise")
@@ -41,13 +42,12 @@ export const Home = () => {
 
     const fetchExercisesByGroup = async () => {
         try {
-            const exercises = await api.get(`/exercises/bygroup/${groupSelected}`)
-            console.log(exercises.data)
+            const response = await api.get(`/exercises/bygroup/${groupSelected}`)
+            setExercices(response.data)
         } catch (err) {
             console.log(err)
         }
     }
-
 
     useEffect(() => {
         fetchGroups()
@@ -56,6 +56,8 @@ export const Home = () => {
     useFocusEffect(useCallback(() => {
         fetchExercisesByGroup()
     }, [groupSelected]))
+
+    console.log(exercices[0])
 
     return (
         <VStack flex={1}>
@@ -85,9 +87,6 @@ export const Home = () => {
                                 isActive={groupSelected.toLocaleUpperCase() === item.toLocaleUpperCase()}
                                 onPress={() => setGroupSelected(item)} />)
                     }
-
-
-
                 }} />
 
             <VStack
@@ -102,17 +101,16 @@ export const Home = () => {
                     >Exercícios</Heading>
                     <Text color="gray.200" fontSize="sm">{exercices.length}</Text>
                 </HStack>
+
                 <FlatList
                     data={exercices}
-                    keyExtractor={item => item}
+                    keyExtractor={item => item.id}
                     _contentContainerStyle={{ pb: 16 }}
                     showsVerticalScrollIndicator={false}
                     renderItem={({ item }) => (
-                        <ExerciseCard onPress={handleOpenExerciceDetails} />
+                        <ExerciseCard exerciseInfo={item} onPress={handleOpenExerciceDetails} />
                     )} />
-
             </VStack>
-
         </VStack>
     )
 }
