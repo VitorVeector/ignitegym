@@ -42,6 +42,16 @@ Iniciando a aplicação
   npm start
 ```
 
+## Observação
+
+Atente-se no arquivo de requisição para testar a aplicação, precisamos do endereço IP Local correto para conseguirmos fazer a requisição
+
+`` src/services/api.ts `` 
+
+![Correção_Endereço_API](https://i.imgur.com/Nc6jchJ.png)
+
+
+
 ## Authors
 
 - [@vitoraraujo](https://www.github.com/vitorveector)

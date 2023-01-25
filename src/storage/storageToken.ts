@@ -10,3 +10,7 @@ export const storageTokenGet = async () => {
     const token = await AsyncStorage.getItem(AUTH_TOKEN_STORAGE)
     return token;
 }
+
+export const storageTokenRemove = async () => {
+    await AsyncStorage.removeItem(AUTH_TOKEN_STORAGE)
+}
