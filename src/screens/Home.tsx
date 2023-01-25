@@ -1,11 +1,12 @@
-import React, { useState, useEffect } from "react"
+import React, { useState, useEffect, useCallback } from "react"
 
 import { HStack, VStack, FlatList, Heading, Text, Toast, useToast } from "native-base"
+
+import { useNavigation, useFocusEffect } from "@react-navigation/native"
 
 import { HomeHeader } from "@components/HomeHeader"
 import { Group } from "@components/Group"
 import { ExerciseCard } from "@components/ExerciseCard"
-import { useNavigation } from "@react-navigation/native"
 import { AppRouteNavigationRoutesProps } from "@routes/app.routes"
 import { api } from "@services/api"
 import { AppError } from "@utils/AppError"
@@ -17,7 +18,7 @@ export const Home = () => {
 
     const [group, setGroup] = useState([])
 
-    const [groupSelected, setGroupSelected] = useState<string>('peitoral');
+    const [groupSelected, setGroupSelected] = useState('peitoral');
 
     const [exercices, setExercices] = useState(["Puxada", "Remada"])
 
@@ -38,19 +39,23 @@ export const Home = () => {
         }
     }
 
-    // const fetchExercises = async () => {
-    //     try {
-    //         const exercises = await api.get(`/exercises/bygroup/${groupSelected}`)
-    //         console.log(exercises.data)
-    //     } catch (err) {
-    //         console.log(err)
-    //     }
-    // }
+    const fetchExercisesByGroup = async () => {
+        try {
+            const exercises = await api.get(`/exercises/bygroup/${groupSelected}`)
+            console.log(exercises.data)
+        } catch (err) {
+            console.log(err)
+        }
+    }
 
 
     useEffect(() => {
         fetchGroups()
     }, [])
+
+    useFocusEffect(useCallback(() => {
+        fetchExercisesByGroup()
+    }, [groupSelected]))
 
     return (
         <VStack flex={1}>
