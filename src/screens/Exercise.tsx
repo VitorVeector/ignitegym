@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useEffect, useState } from "react"
 
 import { ExerciseHeader } from "@components/ExerciseHeader"
 
@@ -7,18 +7,52 @@ import { Button } from "@components/Button"
 
 import Repetitions from "@assets/repetitions.svg"
 import Series from "@assets/series.svg"
+import { AppRouteNavigationRoutesProps } from "@routes/app.routes"
+import { useNavigation, useRoute } from "@react-navigation/native"
+import { api } from "@services/api"
+import { AppError } from "@utils/AppError"
+import { ExerciseDTO } from "@dtos/ExerciseDTO"
+
+type RoutesParams = {
+    exerciseId: string
+}
 
 export const Exercise = () => {
+    const [exercise, setExercise] = useState<ExerciseDTO>({} as ExerciseDTO)
+
+    const navigation = useNavigation<AppRouteNavigationRoutesProps>();
+
+    const route = useRoute()
+
+    const { exerciseId } = route.params as RoutesParams;
+
+    const fetchExerciseDetails = async () => {
+        try {
+            const response = await api.get(`/exercises/${exerciseId}`)
+            setExercise(response.data)
+        } catch (err) {
+            const isAppError = err instanceof AppError
+            const title = isAppError ? err.message : "Não foi possível carregar os exercícios."
+            throw title
+        }
+    }
+
+    useEffect(() => {
+        fetchExerciseDetails()
+    }, [exerciseId])
+
+    console.log(exercise)
+
     return (
         <VStack>
-            <ExerciseHeader />
+            <ExerciseHeader title={exercise.name} group={exercise.group}/>
             <ScrollView>
                 <VStack p={8} mb={16}>
                     <Image
                         w="full"
                         h={80}
-                        source={{ uri: 'http://conteudo.imguol.com.br/c/entretenimento/0c/2019/12/03/remada-unilateral-com-halteres-1575402100538_v2_600x600.jpg' }}
-                        alt="Nome do exercício"
+                        source={{ uri: `${api.defaults.baseURL}/exercise/demo/${exercise.demo}` }}
+                        alt={exercise.name}
                         mb={3}
                         resizeMode="cover"
                         rounded="lg"
@@ -38,7 +72,7 @@ export const Exercise = () => {
                                 <Text
                                     color="gray.200"
                                     fontSize="lg"
-                                    ml={2}>3 séries</Text>
+                                    ml={2}>{exercise.series} séries</Text>
                             </HStack>
                             <HStack
                                 alignItems="center">
@@ -46,7 +80,7 @@ export const Exercise = () => {
                                 <Text
                                     color="gray.200"
                                     fontSize="lg"
-                                    ml={2}>12 repetições</Text>
+                                    ml={2}>{exercise.repetitions} repetições</Text>
                             </HStack>
                         </HStack>
                         <Button

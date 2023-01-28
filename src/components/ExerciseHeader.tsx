@@ -1,4 +1,4 @@
-import React from "react"
+import React, { ReactNode } from "react"
 
 import { TouchableOpacity } from "react-native"
 import { HStack, VStack, Heading, Icon, Text } from "native-base"
@@ -8,7 +8,12 @@ import Body from '@assets/body.svg'
 import { useNavigation } from "@react-navigation/native"
 import { AppRouteNavigationRoutesProps } from "@routes/app.routes"
 
-export const ExerciseHeader = () => {
+type ExerciseHeaderProps = {
+    title: string;
+    group: string
+}
+
+export const ExerciseHeader = ({title, group}: ExerciseHeaderProps) => {
     const navigation = useNavigation<AppRouteNavigationRoutesProps>()
 
     function handleNavigateHome() {
@@ -35,13 +40,14 @@ export const ExerciseHeader = () => {
                     <Heading fontFamily="heading"
                         flexShrink={1}
                         color="gray.100"
-                        fontSize="xl">Puxada frontal</Heading>
+                        maxW="70%"
+                        fontSize="xl">{title}</Heading>
                     <HStack
                         alignItems="center">
                         <Body />
                         <Text
                             ml={1.5}
-                            color="gray.200">Costas</Text>
+                            color="gray.200">{group}</Text>
                     </HStack>
                 </HStack>
             </VStack>

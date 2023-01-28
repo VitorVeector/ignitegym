@@ -3,12 +3,14 @@ import { MaterialIcons } from '@expo/vector-icons'
 import { HStack, Text, Image, VStack, Heading, Icon } from "native-base"
 import { TouchableOpacity, TouchableOpacityProps } from "react-native"
 import { ExerciseDTO } from "@dtos/ExerciseDTO"
+import { api } from "@services/api"
 
 type ExerciseCard = TouchableOpacityProps & {
     exerciseInfo: ExerciseDTO
 }
 
 export const ExerciseCard = ({ exerciseInfo, ...rest }: ExerciseCard) => {
+    console.log(exerciseInfo)
     return (
         <TouchableOpacity {...rest}>
             <HStack
@@ -19,7 +21,7 @@ export const ExerciseCard = ({ exerciseInfo, ...rest }: ExerciseCard) => {
                 p={2}
                 mb={3}>
                 <Image
-                    source={{ uri: "https://cienciadotreinamento.com.br/wp-content/uploads/2015/11/Lat-pulldown-3_2.jpg" }}
+                    source={{ uri: `${api.defaults.baseURL}/exercise/thumb/${exerciseInfo.thumb}` }}
                     alt="Imagem do exercicio"
                     size={16}
                     resizeMode="cover"

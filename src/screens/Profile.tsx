@@ -18,7 +18,7 @@ export const Profile = () => {
 
     const [photoIsLoading, setPhotoIsLoading] = useState<boolean>(false)
 
-    const [imgUri, setImgUri] = useState('https://github.com/vitorveector.png')
+    const [imgUri, setImgUri] = useState('https://upload.wikimedia.org/wikipedia/commons/2/2c/Default_pfp.svg')
 
     const toast = useToast()
 
@@ -47,7 +47,7 @@ export const Profile = () => {
 
             setImgUri(photoSelected.assets[0].uri)
         } catch (err) {
-            console.log(err)
+            throw err
         } finally {
             setPhotoIsLoading(false)
         }
