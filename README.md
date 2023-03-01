@@ -21,12 +21,6 @@ O presente repositório contém toda interface da aplicação desenvolvida com a
     <li>
       <div>
         <h2>Error Toast Screen</h2>
-        <img src="(https://user-images.githubusercontent.com/67335644/222142683-adfb967b-88bb-4deb-8673-13c9934f21c4.png" width="360"> 
-      </div>
-    </li>
-    <li>
-      <div>
-        <h2>Error Toast Screen</h2>
         <img src="https://user-images.githubusercontent.com/67335644/222142683-adfb967b-88bb-4deb-8673-13c9934f21c4.png" width="360">
       </div>
     </li>
@@ -34,6 +28,21 @@ O presente repositório contém toda interface da aplicação desenvolvida com a
       <div>
         <h2>Home Screen</h2>
         <img src="https://user-images.githubusercontent.com/67335644/222142941-d1e89c65-4447-4fef-a15c-8762318cff5b.png" width="360">
+      </div>
+    </li>
+    <li>
+      <div>
+        <h2>Exercise Screen</h2>
+        <img src="https://user-images.githubusercontent.com/67335644/222145695-566fd1d8-eeee-4b73-980d-7d5d51f18e64.png" width="360">
+      </div>
+    </li>
+    <li>
+      <div>
+        <h2>Profile Screen</h2>
+        <div style="display:flex">
+          <img src="https://user-images.githubusercontent.com/67335644/222145921-08fd3380-2143-4303-a984-d69805a7df73.png" width="360">
+          <img src="https://user-images.githubusercontent.com/67335644/222146012-88d206ff-a8bb-4a93-ac83-6e4ccf72ca8a.png" width="360">
+        </div>
       </div>
     </li>
   </ul>
