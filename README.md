@@ -13,8 +13,7 @@ O presente repositório contém toda interface da aplicação desenvolvida com a
 
   <label>
     <h2>⚠️ REQUIRED</h2>
-      Back-end da aplicação disponível em: [ignitegym-api](https://github.com/VitorVeector/ignitegym-api/)
-    
+     ⚙️ Back-end da aplicação disponível em: [ignitegym-api](https://github.com/VitorVeector/ignitegym-api/)
   </label>
   
 
