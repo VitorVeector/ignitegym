@@ -9,7 +9,7 @@ O presente repositório contém toda interface da aplicação desenvolvida com a
     <li>
       <div>
         <h2>Login Screen</h2>
-        <img src="https://user-images.githubusercontent.com/67335644/222142166-e817ba7c-29e3-4222-83ac-5828b76200fe.png">
+        <img src="https://user-images.githubusercontent.com/67335644/222142166-e817ba7c-29e3-4222-83ac-5828b76200fe.png" width="360">
       </div>
     </li>
     <li>
