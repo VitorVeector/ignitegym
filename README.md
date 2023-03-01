@@ -15,25 +15,25 @@ O presente repositório contém toda interface da aplicação desenvolvida com a
     <li>
       <div>
         <h2>Register Screen</h2>
-        ![Registro da aplicação](https://user-images.githubusercontent.com/67335644/222142330-7bd69cac-200d-4859-a358-3b4c4b2cb021.png)
+        <img src="https://user-images.githubusercontent.com/67335644/222142330-7bd69cac-200d-4859-a358-3b4c4b2cb021.png" width="360">
       </div>
     </li>
     <li>
       <div>
         <h2>Error Toast Screen</h2>
-        ![Erro da aplicação](https://user-images.githubusercontent.com/67335644/222142683-adfb967b-88bb-4deb-8673-13c9934f21c4.png)
+        <img src="(https://user-images.githubusercontent.com/67335644/222142683-adfb967b-88bb-4deb-8673-13c9934f21c4.png" width="360"> 
       </div>
     </li>
     <li>
       <div>
         <h2>Error Toast Screen</h2>
-        ![Erro da aplicação](https://user-images.githubusercontent.com/67335644/222142683-adfb967b-88bb-4deb-8673-13c9934f21c4.png)
+        <img src="https://user-images.githubusercontent.com/67335644/222142683-adfb967b-88bb-4deb-8673-13c9934f21c4.png" width="360">
       </div>
     </li>
     <li>
       <div>
         <h2>Home Screen</h2>
-        ![Home da aplicação](https://user-images.githubusercontent.com/67335644/222142941-d1e89c65-4447-4fef-a15c-8762318cff5b.png)
+        <img src="https://user-images.githubusercontent.com/67335644/222142941-d1e89c65-4447-4fef-a15c-8762318cff5b.png" width="360">
       </div>
     </li>
   </ul>
