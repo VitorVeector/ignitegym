@@ -11,8 +11,11 @@ O presente repositório contém toda interface da aplicação desenvolvida com a
   NativeBase is an accessible, utility-first component library that helps you build consistent UI across Android, iOS and Web.
   </label>
 
-  
-  Back-end da aplicação disponível em: [ignitegym-api](https://github.com/VitorVeector/ignitegym-api/) 
+  <label>
+    <h2 style="color: red;">Required!</h2>
+      Back-end da aplicação disponível em: [ignitegym-api](https://github.com/VitorVeector/ignitegym-api/)
+    
+  </label>
   
 
 ## Instalação
