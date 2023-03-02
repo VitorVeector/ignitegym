@@ -8,11 +8,9 @@ export const storageUserSave = async (user: UserDTO) => {
 }
 
 export const storageUserGet = async () => {
-    const storage = await AsyncStorage.getItem(USER_STORAGE)
+    const user = await AsyncStorage.getItem(USER_STORAGE);
 
-    const user: UserDTO = storage ? JSON.parse(storage) : {}
-
-    return user
+    return user ? (JSON.parse(user) as UserDTO) : null;
 }
 
 export const storageUserOut = async () => {

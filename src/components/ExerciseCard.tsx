@@ -10,7 +10,6 @@ type ExerciseCard = TouchableOpacityProps & {
 }
 
 export const ExerciseCard = ({ exerciseInfo, ...rest }: ExerciseCard) => {
-    console.log(exerciseInfo)
     return (
         <TouchableOpacity {...rest}>
             <HStack

@@ -21,9 +21,24 @@ export type AuthContextProps = {
     user: UserDTO,
     signIn: (email: string, password: string) => Promise<void>,
     isLoadingStorageUserData: boolean,
-    signOut: () => Promise<void>
+    signOut: () => Promise<void>,
+    updateUserProfile: (userUpdated: UserDTO) => Promise<void>
 }
 
 export type AuthContextProviderProps = {
     children: ReactNode;
+}
+
+export type FormDataProps = {
+    name: string;
+    email: string;
+    password: string;
+    old_password: string;
+    confirm_password: string;
+}
+
+export type HistoryCardProps = {
+    group: string;
+    name: string;
+    hour: string
 }

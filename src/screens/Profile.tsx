@@ -18,7 +18,7 @@ export const Profile = () => {
 
     const [photoIsLoading, setPhotoIsLoading] = useState<boolean>(false)
 
-    const [imgUri, setImgUri] = useState('https://upload.wikimedia.org/wikipedia/commons/2/2c/Default_pfp.svg')
+    const [imgUri, setImgUri] = useState('https://videotanfolyam.hu/images/blog/lead200/windows_10_bejelentkezes.png')
 
     const toast = useToast()
 

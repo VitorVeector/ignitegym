@@ -18,12 +18,15 @@ export const AuthContextProvider = ({ children }: AuthContextProviderProps) => {
 
     const storageUserAndTokenSave = async (user: UserDTO, token: string) => {
         try {
+            setIsLoadingStorageUserData(true)
             await storageUserSave(user)
             await storageTokenSave(token)
 
         } catch (err) {
             throw err
-        }
+        }  finally {
+            setIsLoadingStorageUserData(false)
+          }
     }
 
     const signIn = async (email, password) => {
@@ -60,6 +63,15 @@ export const AuthContextProvider = ({ children }: AuthContextProviderProps) => {
         }
     }
 
+    async function updateUserProfile(userUpdated: UserDTO) {
+        // try {
+        //   setUser(userUpdated);
+        //   await storageUserSave(userUpdated);
+        // } catch (error) {
+        //   throw error;
+        // }
+      }
+
     const loadUserData = async () => {
         try {
             setIsLoadingStorageUserData(true)
@@ -81,7 +93,7 @@ export const AuthContextProvider = ({ children }: AuthContextProviderProps) => {
     }, [])
 
     return (
-        <AuthContext.Provider value={{ user, signIn, isLoadingStorageUserData, signOut }}>
+        <AuthContext.Provider value={{ user, signIn, isLoadingStorageUserData, signOut, updateUserProfile }}>
             {children}
         </AuthContext.Provider>
     )
