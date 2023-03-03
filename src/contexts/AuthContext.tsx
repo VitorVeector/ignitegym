@@ -64,12 +64,12 @@ export const AuthContextProvider = ({ children }: AuthContextProviderProps) => {
     }
 
     async function updateUserProfile(userUpdated: UserDTO) {
-        // try {
-        //   setUser(userUpdated);
-        //   await storageUserSave(userUpdated);
-        // } catch (error) {
-        //   throw error;
-        // }
+        try {
+          setUser(userUpdated);
+          await storageUserSave(userUpdated);
+        } catch (error) {
+          throw error;
+        }
       }
 
     const loadUserData = async () => {

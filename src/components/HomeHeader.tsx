@@ -3,10 +3,13 @@ import { useAuth } from '@hooks/useAuth'
 
 import { HStack, Text, Heading, VStack, Icon } from 'native-base'
 import { TouchableOpacity, Alert } from 'react-native'
-import userPhotoDefault from "@assets/userPhotoDefault.png"
+import defaultUserPhotoImg from '@assets/userPhotoDefault.png'
 import { UserPhoto } from './UserPhoto'
+import { api } from '@services/api'
 
 export const HomeHeader = () => {
+    const PHOTO_SIZE = 16
+
     const { user, signOut } = useAuth()
 
     const logOut = () => {
@@ -25,7 +28,9 @@ export const HomeHeader = () => {
 
     return (
         <HStack bg="gray.500" width="full" pt={16} pb={5} px={8} alignItems="center">
-            <UserPhoto size={16} source={user.avatar ? { uri: user.avatar } : userPhotoDefault} alt="Foto de perfil do usuário" mr={4} />
+            <UserPhoto source={user.avatar ?
+                                { uri: `${api.defaults.baseURL}/avatar/${user.avatar}` }
+                                : defaultUserPhotoImg} size={PHOTO_SIZE} alt="Foto do usuário" mr={3} />
             <HStack alignItems="center" flex={1} justifyContent="space-between">
                 <VStack>
                     <Text color="gray.100" fontSize="md">Olá,</Text>

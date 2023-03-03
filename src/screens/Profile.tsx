@@ -1,20 +1,26 @@
 import React, { useState } from "react"
+import { Center, Heading, ScrollView, Skeleton, Text, VStack, useToast } from "native-base"
+import { TouchableOpacity, Alert } from "react-native"
 
 import * as ImagePicker from "expo-image-picker"
 import * as FileSystem from "expo-file-system"
 
-import { TouchableOpacity, Alert } from "react-native"
-import { Center, Heading, ScrollView, Skeleton, Text, VStack, useToast } from "native-base"
+import defaultUserPhotoImg from '@assets/userPhotoDefault.png'
+
+import { api } from "@services/api"
 
 import { UserPhoto } from "@components/UserPhoto"
 import { ScreenHeader } from "@components/ScreenHeader"
 import { Input } from "@components/Input"
 import { Button } from "@components/Button"
+import { useAuth } from "@hooks/useAuth"
 
 
 const PHOTO_SIZE = 33
 
 export const Profile = () => {
+
+    const { user, updateUserProfile } = useAuth()
 
     const [photoIsLoading, setPhotoIsLoading] = useState<boolean>(false)
 
@@ -23,9 +29,8 @@ export const Profile = () => {
     const toast = useToast()
 
     const handleUserPhotoSelect = async () => {
-        setPhotoIsLoading(true)
-
         try {
+            setPhotoIsLoading(true)
             const photoSelected = await ImagePicker.launchImageLibraryAsync({
                 mediaTypes: ImagePicker.MediaTypeOptions.Images,
                 quality: 1,
@@ -37,13 +42,34 @@ export const Profile = () => {
 
             const photoInfo = await FileSystem.getInfoAsync(photoSelected.assets[0].uri)
 
-            if (photoInfo.size / 1024 / 1024 >= 3) {
+            if (photoInfo.size / 1024 / 1024 >= 5) {
                 return toast.show({
                     title: "A imagem não pode ultrapassar 5MB!",
                     placement: "top",
                     bgColor: "red.500"
                 })
             }
+
+            const fileExtension = photoInfo.uri.split(".").pop()
+
+            const photoFile = {
+                name: `${user.name}.${fileExtension}`.toLowerCase(),
+                uri: photoInfo.uri,
+                type: `${photoSelected.assets[0].type}/${fileExtension}`
+              } as any
+
+            const userPhotoUploadForm = new FormData()
+            userPhotoUploadForm.append('avatar', photoFile)
+
+            const avatarUpdatedResponse = await api.patch('/users/avatar', userPhotoUploadForm, {
+                headers: {
+                    'Content-Type': 'multipart/form-data'
+                }
+            })
+
+            const userUpdated = user
+            userUpdated.avatar = avatarUpdatedResponse.data.avatar
+            updateUserProfile(userUpdated)
 
             setImgUri(photoSelected.assets[0].uri)
         } catch (err) {
@@ -61,6 +87,7 @@ export const Profile = () => {
                     {
                         photoIsLoading ? (
                             <Skeleton
+                                isLoaded={!photoIsLoading}
                                 w={PHOTO_SIZE}
                                 h={PHOTO_SIZE}
                                 rounded="full"
@@ -68,10 +95,7 @@ export const Profile = () => {
                                 endColor="gray.400"
                             />
                         ) : (
-                            <UserPhoto
-                                size={PHOTO_SIZE}
-                                alt="Foto de perfil"
-                                source={{ uri: imgUri }} />
+                            <UserPhoto source={user.avatar ? { uri: `${api.defaults.baseURL}/avatar/${user.avatar}` } : defaultUserPhotoImg} size={PHOTO_SIZE} alt="Foto do usuário" />
                         )
                     }
 
@@ -120,8 +144,4 @@ export const Profile = () => {
             </ScrollView>
         </VStack>
     );
-}
-
-function setImage(uri: string) {
-    throw new Error("Function not implemented.")
 }
