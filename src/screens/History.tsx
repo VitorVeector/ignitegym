@@ -1,9 +1,10 @@
 import { HistoryCard } from "@components/HistoryCard"
 import { ScreenHeader } from "@components/ScreenHeader"
 import { HistoryByDayDTO } from "@dtos/HistoryByDayDTO"
+import { useFocusEffect } from "@react-navigation/native"
 import { api } from "@services/api"
 import { VStack, SectionList, Heading, Text } from "native-base"
-import React, { useEffect, useState } from "react"
+import React, { useState } from "react"
 
 export const History = () => {
     const [exercises, setExercises] = useState<HistoryByDayDTO[]>([])
@@ -17,9 +18,9 @@ export const History = () => {
         }
     }
 
-    useEffect(()=>{
+    useFocusEffect(()=>{
         getHistoryInfo()
-    },[])
+    })
 
     return (
         <VStack flex={1}>
