@@ -97,7 +97,6 @@ export function SignUp() {
                         name="name"
                         render={({ field: { onChange, value } }) => (
                             <VStack
-
                                 w="full">
                                 <Input
                                     isInvalid={!!errors.name?.message}

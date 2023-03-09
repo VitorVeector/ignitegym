@@ -17,6 +17,13 @@ export interface ISignUpFormInputData {
     passwordConfirmation: string,
 }
 
+export interface IUpdateUserData {
+    name: string,
+    old_password: string,
+    password: string,
+    passwordConfirmation: string,
+}
+
 export type AuthContextProps = {
     user: UserDTO,
     signIn: (email: string, password: string) => Promise<void>,
